@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aistudio.timetracker.puxnfe"
+    namespace = "com.example"
     compileSdk = 35
 
     defaultConfig {
