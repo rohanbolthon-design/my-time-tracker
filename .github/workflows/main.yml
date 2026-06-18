@@ -12,6 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    # تنظیم نسخه جاوای سرور روی ۱۷
     - name: set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -19,12 +20,21 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    # رفع خطای عدم تطابق نسخه جاوا در تنظیمات پروژه (حل مشکل عکس اول شما)
+    - name: Force Java 17 in gradle.properties
+      run: |
+        echo "org.gradle.java.home=${{ env.JAVA_HOME }}" >> gradle.properties
+        sed -i 's/jvmTarget = .*/jvmTarget = "17"/g' app/build.gradle.kts || true
+        sed -i 's/compatibility = .*/compatibility = JavaVersion.VERSION_17/g' app/build.gradle.kts || true
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    # اجرای کامپایل برنامه
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --no-daemon
 
+    # آپلود فایل نصب نهایی
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
