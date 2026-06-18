@@ -1,0 +1,6 @@
+{
+  "name": "ثبت کارکرد",
+  "description": "برنامه ایرانی مدیریت و ثبت ساعت کارکرد و محاسبه حقوق بر اساس ساعت موظفی و تقویم جلالی با قابلیت خروجی اکسل پیشرفته",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
